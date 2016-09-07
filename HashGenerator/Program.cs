@@ -12,15 +12,18 @@ namespace HashGenerator
 		{
 			if (args == null || args.Length != 2)
 			{
-				Console.WriteLine("Arg format: <hash-type: -md5, -sha1, -sha256, -sha384, -sha512> <pathToFile>");
+				Console.WriteLine("Arg format: <hash-type: -md5, -sha1, -sha256, -sha384, -sha512> <PathToFile: \"...\">");
 				return;
 			}
 
+			string hashType = args[0];
+			string pathToFile = args[1];
+
 			try
 			{
-				using (var stream = new FileStream(args[1], FileMode.Open, FileAccess.Read, FileShare.None))
+				using (var stream = new FileStream(pathToFile, FileMode.Open, FileAccess.Read, FileShare.None))
 				{
-					if (args[0] == "-md5")
+					if (hashType == "-md5")
 					{
 						using (var hash = new System.Security.Cryptography.MD5CryptoServiceProvider())
 						{
@@ -29,7 +32,7 @@ namespace HashGenerator
 							Console.WriteLine("HEX: " + hex);
 						}
 					}
-					else if (args[0] == "-sha1")
+					else if (hashType == "-sha1")
 					{
 						using (var hash = new System.Security.Cryptography.SHA1CryptoServiceProvider())
 						{
@@ -38,7 +41,7 @@ namespace HashGenerator
 							Console.WriteLine("HEX: " + hex);
 						}
 					}
-					else if (args[0] == "-sha256")
+					else if (hashType == "-sha256")
 					{
 						using (var hash = new System.Security.Cryptography.SHA256CryptoServiceProvider())
 						{
@@ -47,7 +50,7 @@ namespace HashGenerator
 							Console.WriteLine("HEX: " + hex);
 						}
 					}
-					else if (args[0] == "-sha384")
+					else if (hashType == "-sha384")
 					{
 						using (var hash = new System.Security.Cryptography.SHA384CryptoServiceProvider())
 						{
@@ -56,7 +59,7 @@ namespace HashGenerator
 							Console.WriteLine("HEX: " + hex);
 						}
 					}
-					else if (args[0] == "-sha512")
+					else if (hashType == "-sha512")
 					{
 						using (var hash = new System.Security.Cryptography.SHA512CryptoServiceProvider())
 						{
