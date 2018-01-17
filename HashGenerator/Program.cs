@@ -9,6 +9,7 @@ namespace HashGenerator
 		{
 			if (args == null || args.Length != 2)
 			{
+				Console.WriteLine("HashGenerator v1.0.1");
 				Console.WriteLine("Arg format: <hash-type: md5 | sha1 | sha256 | sha384 | sha512> <PathToFile: \"...\">");
 				return;
 			}
