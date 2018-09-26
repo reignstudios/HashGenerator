@@ -43,8 +43,9 @@ namespace HashGenerator
 
 			if (!string.IsNullOrEmpty(hashValue) && !string.IsNullOrEmpty(path))
 			{
-				if (SearchPathForFileHash(hashType, hashValue, path)) Console.WriteLine("Search completed!");
-				else Console.WriteLine("No file found with a hash of: " + hashValue);
+				Console.WriteLine("Searching...");
+				SearchPathForFileHash(hashType, hashValue, path);
+				Console.WriteLine("Search completed!");
 			}
 			else if (!string.IsNullOrEmpty(path))
 			{
@@ -116,31 +117,25 @@ namespace HashGenerator
 		}
 
 		[Pure]
-		private static bool SearchPathForFileHash(string hashType, string hash, string searchPath)
+		private static void SearchPathForFileHash(string hashType, string hash, string searchPath)
 		{
 			try
 			{
 				foreach (string filePath in Directory.GetFiles(searchPath))
 				{
 					string fileHash = GenerateFileHash(hashType, filePath);
-					if (hash == fileHash)
-					{
-						Console.WriteLine(string.Format("File found: '{0}'", filePath));
-						return true;
-					}
+					if (hash == fileHash) Console.WriteLine(string.Format("File found: '{0}'", filePath));
 				}
 
 				foreach (string subSearchPath in Directory.GetDirectories(searchPath))
 				{
-					if (SearchPathForFileHash(hashType, hash, subSearchPath)) return true;
+					SearchPathForFileHash(hashType, hash, subSearchPath);
 				}
 			}
 			catch (Exception e)
 			{
 				Console.WriteLine("Error: " + e.Message);
 			}
-			
-			return false;
 		}
 	}
 }
