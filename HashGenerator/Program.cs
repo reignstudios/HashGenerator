@@ -10,8 +10,8 @@ namespace HashGenerator
 		{
 			if (args == null || args.Length < 2)
 			{
-				Console.WriteLine("HashGenerator v1.1.0");
-				Console.WriteLine("Arg format: -type=<md5 | sha1 | sha256 | sha384 | sha512> -file=<\"PathToFile\"> | -hash=<HashValue> -search=<\"PathToFolder\">");
+				Console.WriteLine("HashGenerator v1.1.1");
+				Console.WriteLine("Arg format: -type=<md5 | sha1 | sha256 | sha384 | sha512> (-file=<\"PathToFile\"> | -hash=<HashValue> -search=<\"PathToFolder\">)");
 				return;
 			}
 
